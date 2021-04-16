@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Commenter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="243.646" Width="286.602">
+    <Grid x:Name="mainGrid">
+        <Button Content="開始する" HorizontalAlignment="Left" Margin="94,30,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="今までのコメントをコピーする" HorizontalAlignment="Left" Margin="94,124,0,0" VerticalAlignment="Top" Width="163" Click="Button_Click_1"/>
+
     </Grid>
 </Window>
