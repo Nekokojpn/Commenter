@@ -93,8 +93,8 @@ namespace Commenter
 
         private void FlowComment(string comment)
         {
-            if (!comment.Contains("mode=\"1\""))
-                return;
+            //if (!comment.Contains("mode=\"1\""))
+              //  return;
 
             DispatcherTimer dt = new DispatcherTimer();
             dt.Interval = TimeSpan.FromMilliseconds(10);
@@ -110,6 +110,8 @@ namespace Commenter
             int x = 15;
             dt.Tick += (ss, ee) =>
             {
+                if (tb.Margin.Left < 0)
+                    dt.Stop();
                 tb.Margin = new Thickness(0, tb.Margin.Top, x += 5, 0);
             };
             dt.Start();
