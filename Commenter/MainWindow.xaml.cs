@@ -26,6 +26,7 @@ namespace Commenter
     {
         FlowComments comments = new FlowComments();
         List<string> messages = new List<string>();
+        ClientWebSocket ws = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +35,7 @@ namespace Commenter
         private async Task ConnectToServer()
         {
             //クライアント側のWebSocketを定義
-            ClientWebSocket ws = new ClientWebSocket();
+            ws = new ClientWebSocket();
 
             //接続先エンドポイントを指定
             var uri = new Uri("ws://ik1-431-47779.vs.sakura.ne.jp:25252");
@@ -67,7 +68,6 @@ namespace Commenter
                       "I don't do binary", CancellationToken.None);
                     return;
                 }
-
                 //メッセージの最後まで取得
                 int count = result.Count;
                 while (!result.EndOfMessage)
@@ -133,6 +133,45 @@ namespace Commenter
             string cmts = "";
             messages.ForEach(x => cmts += x + Environment.NewLine);
             MessageBox.Show("コピーしました。");
+        }
+
+        private void minusBtn_Click(object sender, RoutedEventArgs e)
+        {
+            choisesList.Items.RemoveAt(choisesList.SelectedIndex);
+        }
+
+        private void plusBtn_Click(object sender, RoutedEventArgs e)
+        {
+            input inp = new input();
+            inp.enterAction = () =>
+            {
+                choisesList.Items.Add(inp.inputText.Text);
+            };
+            inp.Show();
+        }
+
+        private async void broadcastBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(ws == null)
+            {
+                MessageBox.Show("初めに開始ボタンを押してください。");
+                return;
+            }
+            string elms = "";
+            for(int i = 0; i < choisesList.Items.Count; i++)
+            {
+                elms += "\"" + choisesList.Items[0].ToString() + "\",";
+            }
+            elms = elms.Substring(0, elms.Length - 1);
+            var json = "{\"username\":\"LTMaster\", \"choises\":[" + elms + "], \"mode\":2}";
+            Clipboard.SetText(json);
+
+            var buffer = Encoding.UTF8.GetBytes(json);
+            var segment = new ArraySegment<byte>(buffer);
+
+            //クライアント側に文字列を送信
+            await ws.SendAsync(segment, WebSocketMessageType.Text,
+              true, CancellationToken.None);
         }
     }
 }

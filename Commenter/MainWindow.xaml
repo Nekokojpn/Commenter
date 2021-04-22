@@ -7,8 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="243.646" Width="286.602">
     <Grid x:Name="mainGrid">
-        <Button Content="開始する" HorizontalAlignment="Left" Margin="94,30,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Button Content="今までのコメントをコピーする" HorizontalAlignment="Left" Margin="94,124,0,0" VerticalAlignment="Top" Width="163" Click="Button_Click_1"/>
+        <Button Content="開始する" HorizontalAlignment="Left" Margin="7,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="今までのコメントをコピーする" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Width="163" Click="Button_Click_1"/>
+        <ListBox x:Name="choisesList" HorizontalAlignment="Left" Height="100" Margin="169,103,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="plusBtn" Content="+" HorizontalAlignment="Left" Margin="217,83,0,0" VerticalAlignment="Top" Width="19" Click="plusBtn_Click"/>
+        <Button x:Name="minusBtn" Content="-" HorizontalAlignment="Left" Margin="241,83,0,0" VerticalAlignment="Top" Width="19" Click="minusBtn_Click"/>
+        <Button x:Name="broadcastBtn" Content="配信" HorizontalAlignment="Left" Margin="169,83,0,0" VerticalAlignment="Top" Width="43" Click="broadcastBtn_Click"/>
 
     </Grid>
 </Window>
